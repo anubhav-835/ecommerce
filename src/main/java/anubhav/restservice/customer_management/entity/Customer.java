@@ -2,29 +2,34 @@ package anubhav.restservice.customer_management.entity;
 
 import jakarta.persistence.*;
 
-import java.util.Objects;
-
 @Entity
-@Table(name = "Stud")
+@Table(name = "customers")
 public class Customer {
     @Id
-    @GeneratedValue
-    Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    @Column(name = "custname")
-    String name;
+    @Column(nullable = false, unique = true)
+    private String username;
 
-    String username;
-    String phone;
-    String email;
-    String password;
+    @Column(nullable = false)
+    private String name;
+
+    @Column(nullable = false)
+    private String phone;
+
+    @Column(nullable = false, unique = true)
+    private String email;
+
+    @Column(nullable = false)
+    private String password;
 
     public Customer() {
     }
 
-    public Customer(String name, String username, String phone, String email, String password) {
-        this.name = name;
+    public Customer(String username, String name, String phone, String email, String password) {
         this.username = username;
+        this.name = name;
         this.phone = phone;
         this.email = email;
         this.password = password;
@@ -38,20 +43,20 @@ public class Customer {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getUsername() {
         return username;
     }
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getPhone() {
@@ -76,17 +81,5 @@ public class Customer {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    @Override
-    public String toString() {
-        return "Customer{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", username='" + username + '\'' +
-                ", phone='" + phone + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                '}';
     }
 }
